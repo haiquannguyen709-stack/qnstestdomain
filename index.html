@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quân Nguyễn Study – Quản trị thi</title>
+<title>Quân Nguyễn Study – Bộ phận khảo thí</title>
 <style>
 :root{--b:#1565C0;--bl:#E3F2FD;--bg:#F5F7FA;--t:#263238;--g:#2E7D32;--o:#F39C12;--r:#D32F2F;--bd:#E0E6ED;--mu:#78909C}
 *{box-sizing:border-box}body{margin:0;font:14px/1.5 "Be Vietnam Pro","Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--t)}
@@ -115,6 +115,30 @@ tbody tr:nth-child(even){background-color:#E7F1FF}
 .mon-page .table-mon td:nth-child(5) { color: #1565C0; font-weight: 400; }
 .mon-page .btn-mon-detail { background-color: #1565C0 !important; color: #FFFFFF !important; font-weight: 700 !important; border: 1px solid #1565C0 !important; border-radius: 6px; padding: 4px 10px; cursor: pointer; transition: all 0.15s ease; line-height: 1.2; }
 .mon-page .btn-mon-detail:hover { background-color: #0D47A1 !important; border-color: #0D47A1 !important; color: #FFFFFF !important; }
+
+/* ===== GIAO DIỆN CỔNG TRA CỨU HỌC SINH ===== */
+.student-portal main { padding: 24px; max-width: 960px; margin-left: 240px; }
+body.col.student-portal main { margin-left: 64px; }
+@media(max-width:760px){.student-portal main { margin-left: 0; padding: 16px; }}
+.portal-card { background: #fff; border: 1px solid var(--bd); border-radius: 12px; padding: 24px; box-shadow: 0 4px 16px rgba(21,101,192,0.06); margin-bottom: 20px; }
+.portal-card h2 { margin-top: 0; color: #0D47A1; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.portal-desc { color: var(--mu); font-size: 14px; margin-bottom: 20px; }
+.portal-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 16px; }
+.portal-field label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--t); font-size: 13px; }
+.portal-field input, .portal-field select, .portal-field textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--bd); border-radius: 8px; font-size: 14px; background: #fff; color: var(--t); }
+.portal-field textarea { resize: vertical; min-height: 100px; }
+.portal-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+.portal-result-box { margin-top: 24px; padding: 20px; border-radius: 10px; background: var(--bg); border: 1px dashed var(--bd); }
+.portal-notice { background: #E7F1FF; border: 1px solid #B3D7FF; color: #0D47A1; padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; line-height: 1.5; }
+.review-modal-content { max-width: 680px; }
+.portal-score { display:flex; align-items:baseline; gap:12px; margin:8px 0 14px; }
+.portal-score span { color:var(--mu); font-size:14px; }
+.portal-score b { font-size:40px; line-height:1; color:#0D47A1; }
+.portal-state { padding:12px 14px; border-radius:8px; font-weight:600; line-height:1.6; margin-bottom:12px; }
+.portal-state.ok { background:#E8F5E9; border:1px solid #A5D6A7; color:#1B5E20; }
+.portal-state.warn { background:#FFF8E1; border:1px solid #FFE082; color:#8A5A00; }
+.portal-state.err { background:#FDECEC; border:1px solid #F5C6CB; color:#B71C1C; }
+.portal-state.info { background:#E7F1FF; border:1px solid #B3D7FF; color:#0D47A1; }
 </style></head><body>
 
 <!-- ================= ĐĂNG NHẬP ================= -->
@@ -132,7 +156,7 @@ tbody tr:nth-child(even){background-color:#E7F1FF}
   <span title="Tài khoản đang đăng nhập">👤 Admin</span></header>
  <nav id="side">
   <div class="sidebar-brand lb">
-   <div style="font-weight:700;font-size:12px;color:var(--t);line-height:1.4;margin-bottom:12px">BỘ PHẬN KHẢO THÍ VÀ<br>KIỂM SOÁT CHẤT LƯỢNG</div>
+   <div style="font-weight:700;font-size:12px;color:rgb(21,101,192);line-height:1.4;margin-bottom:12px">BỘ PHẬN KHẢO THÍ VÀ<br>KIỂM SOÁT CHẤT LƯỢNG</div>
    <img src="logo.png" alt="Logo" style="width:100%;max-width:190px;height:auto;object-fit:contain;display:block;margin:6px auto 0">
   </div>
   <div id="navs" style="flex:1"></div>
@@ -193,7 +217,7 @@ const DemoDataService=(()=>{
 const D=()=>MockDataService.get();
 
 /* ===== CÁC SERVICE ===== */
-const API_CONFIG={URL:'https://script.google.com/macros/s/AKfycbx1qAo6fmEe-9Naop-5E4mTwKDcQynZImLhTJDqATu_zZHan8eWy0roj6eq93mVm2yyKA/exec',REFRESH_MS:10000}; // DÁN URL Web App (…/exec) vào URL
+const API_CONFIG={URL:'https://script.google.com/macros/s/AKfycbzJ3NIm1cV8xJ8pbVKBonZD3iei8X7AdmZLBxXaUFHkT8ra6ImVm2FSxCXSlXvehi-LTw/exec',REFRESH_MS:10000}; // DÁN URL Web App (…/exec) vào URL
 const ApiService={cred:null,seq:0,
  async call(action,payload={}){
   if(!API_CONFIG.URL)throw new Error('Chưa cấu hình URL Web App trong API_CONFIG.URL.');
@@ -201,7 +225,15 @@ const ApiService={cred:null,seq:0,
   catch(e){throw new Error('Không kết nối được máy chủ. Vui lòng kiểm tra mạng và thử lại.')}
   let j;try{j=await r.json()}catch(e){throw new Error('Máy chủ trả về dữ liệu không hợp lệ.')}
   if(!j.success)throw new Error(j.message||'Yêu cầu thất bại.');return j},
- async login(u,p){this.cred={u,p};try{await this.call('ADMIN_LOGIN')}catch(e){this.cred=null;throw e}}};
+ async callPublic(action,payload={}){
+   if(!API_CONFIG.URL)throw Object.assign(new Error('Chưa cấu hình URL Web App trong API_CONFIG.URL.'),{kind:'config'});
+   let r;try{r=await fetch(API_CONFIG.URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({...payload,publicAction:action})})}
+   catch(e){throw Object.assign(new Error('Không kết nối được máy chủ. Vui lòng kiểm tra mạng và thử lại.'),{kind:'network'})}
+   let j;try{j=await r.json()}catch(e){throw Object.assign(new Error('Máy chủ trả về dữ liệu không hợp lệ.'),{kind:'invalid'})}
+   if(!j||typeof j!=='object'||typeof j.success!=='boolean')throw Object.assign(new Error('Máy chủ trả về dữ liệu không hợp lệ.'),{kind:'invalid'});
+   if(!j.success)throw Object.assign(new Error(j.message||'Yêu cầu thất bại.'),{kind:'server',code:j.errorCode||''});
+   return j},
+  async login(u,p){this.cred={u,p};try{await this.call('ADMIN_LOGIN')}catch(e){this.cred=null;throw e}}};
 const AuthService={login:(u,p)=>ApiService.login(u,p),logout:()=>{ApiService.cred=null}};
 const RemoteDataService=(()=>{
  const T=s=>s?(Date.parse(String(s).replace(' ','T')+'+07:00')||null):null,RK='qn_reviewed';
@@ -339,9 +371,107 @@ sec:{title:'Kiểm soát gian lận',html:()=>'<div class="fraud-page">'+head('K
    return[fmt(s.time),esc(a.name),a.sbd,a.code,EVL[s.type],s.q,tag(PRI[s.type],{Cao:'#D32F2F','Trung bình':'#F39C12',Thấp:'#78909C'}[PRI[s.type]]),esc(s.detail),tag(RV[s.rv],s.rv?'#2E7D32':'#F39C12'),
    `<span class="ac"><button class="btn sm btn-sec-profile" onclick="showAtt('${a.id}')">Hồ sơ</button> <button class="btn sm btn-sec-history" onclick="secHist('${a.id}')">Lịch sử</button> ${s.rv?'':`<button class="btn sm btn-sec-reviewed" onclick="doReview('${s.id}',this)">Đã xem xét</button>`}</span>`]}),'sec')}}
 };
-const ICON={home:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>',cand:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',mon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>',data:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>',sec:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>'};let cur=V.home,curKey='home';
-function go(k,pre){curKey=k;cur=V[k];P={};try{sessionStorage.setItem('qn_cur_view',k)}catch(e){}$('#navs').innerHTML=Object.keys(V).map(x=>`<button class="nav ${x==k?'on':''}" title="${V[x].title}" onclick="go('${x}')"><span>${ICON[x]}</span><span class="lb">${V[x].title}</span></button>`).join('');
- $('#main').innerHTML=cur.html();if(k=='data')RemoteDataService.loadLogs().then(()=>cur.res()).catch(er=>toast(er.message,'e'));if(pre&&pre.q)$('#q').value=pre.q;document.body.classList.remove('open');cur.res()}
+let currentUserRole = 'admin'; // 'admin' hoặc 'student'
+
+const ICON={
+ home:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>',
+ cand:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+ mon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>',
+ data:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>',
+ sec:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>',
+ s_score:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>',
+ s_sbd:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>',
+ s_review:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>'
+};
+
+// Mở rộng đối tượng V bao gồm các view học sinh
+V.s_score = {
+ title: 'Tra cứu điểm',
+ html: () => `<div class="portal-card">
+  <h2>TRA CỨU ĐIỂM THI</h2>
+  <div class="portal-desc">Nhập đầy đủ thông tin để tra cứu kết quả thi của bạn.</div>
+  <div class="portal-notice">Kết quả được lấy trực tiếp từ hệ thống thi. Vui lòng nhập chính xác Mã đề thi, Số báo danh và Phòng thi như trên giấy báo dự thi.</div>
+  <div class="portal-form-grid">
+   <div class="portal-field"><label>Mã đề thi *</label><input id="lookup_code" placeholder="Ví dụ: A101"></div>
+   <div class="portal-field"><label>Số báo danh *</label><input id="lookup_sbd" placeholder="Ví dụ: 001"></div>
+   <div class="portal-field"><label>Phòng thi *</label><input id="lookup_room" placeholder="Ví dụ: P01"></div>
+  </div>
+  <div class="portal-actions">
+   <button class="btn p" onclick="handleLookupScore()">Tra cứu điểm</button>
+   <button class="btn" onclick="clearLookupScore()">Xóa thông tin</button>
+  </div>
+  <div class="portal-result-box" id="score_result_container">
+   <div style="color:var(--mu);text-align:center;">Vui lòng nhập thông tin và bấm "Tra cứu điểm" để xem kết quả.</div>
+  </div>
+ </div>`,
+ res() {}
+};
+
+V.s_sbd = {
+ title: 'Tra cứu số báo danh',
+ html: () => `<div class="portal-card">
+  <h2>TRA CỨU SỐ BÁO DANH</h2>
+  <div class="portal-desc">Nhập thông tin đăng ký dự thi để tra cứu số báo danh và thông tin liên quan.</div>
+  <div class="portal-notice">Vui lòng nhập chính xác Họ và tên (có dấu), Mã đề thi và Hội đồng thi như trong danh sách dự thi.</div>
+  <div class="portal-form-grid">
+   <div class="portal-field"><label>Họ và tên *</label><input id="sbd_name" placeholder="Ví dụ: Nguyễn Văn An"></div>
+   <div class="portal-field"><label>Mã đề thi *</label><input id="sbd_code" placeholder="Ví dụ: A101"></div>
+   <div class="portal-field"><label>Hội đồng thi *</label><input id="sbd_council" placeholder="Ví dụ: Hội đồng thi THPT Cầu Giấy"></div>
+  </div>
+  <div class="portal-actions">
+   <button class="btn p" onclick="handleLookupSBD()">Tra cứu số báo danh</button>
+   <button class="btn" onclick="clearLookupSBD()">Xóa thông tin</button>
+  </div>
+  <div class="portal-result-box" id="sbd_result_container">
+   <div style="color:var(--mu);text-align:center;">Vui lòng nhập thông tin và bấm "Tra cứu số báo danh".</div>
+  </div>
+ </div>`,
+ res() {}
+};
+
+V.s_review = {
+ title: 'Phúc khảo',
+ html: () => `<div class="portal-card">
+  <h2>PHÚC KHẢO BÀI THI</h2>
+  <div class="portal-desc">Tra cứu bài thi và gửi yêu cầu phúc khảo khi cần thiết.</div>
+  <div class="portal-notice">Bước 1: Xác thực bài thi. Hệ thống sẽ kiểm tra thông tin bài thi của bạn trước khi cho phép lập yêu cầu phúc khảo.</div>
+  <div class="portal-form-grid">
+   <div class="portal-field"><label>Mã đề thi *</label><input id="rev_code" placeholder="Ví dụ: A101"></div>
+   <div class="portal-field"><label>Số báo danh *</label><input id="rev_sbd" placeholder="Ví dụ: 001"></div>
+   <div class="portal-field"><label>Phòng thi *</label><input id="rev_room" placeholder="Ví dụ: P01"></div>
+  </div>
+  <div class="portal-actions">
+   <button class="btn p" onclick="handleVerifyReviewExam()">Tra cứu bài thi</button>
+   <button class="btn" onclick="clearReviewForm()">Xóa thông tin</button>
+  </div>
+  <div class="portal-result-box" id="review_status_container">
+   <div style="color:var(--mu);text-align:center;">Chưa xác minh bài thi. Vui lòng nhập thông tin phía trên.</div>
+  </div>
+ </div>`,
+ res() {}
+};
+
+function go(k,pre){
+ curKey=k; cur=V[k]; P={};
+ try{sessionStorage.setItem('qn_cur_view',k)}catch(e){}
+ 
+ // Xác định danh sách các mục hiển thị trên sidebar dựa theo vai trò người dùng
+ let navKeys = [];
+ if(currentUserRole === 'student'){
+  navKeys = ['s_score', 's_sbd', 's_review'];
+  if(!navKeys.includes(k)) { k = 's_score'; curKey = k; cur = V[k]; }
+ } else {
+  // Admin: hiển thị toàn bộ quản trị cũ + 3 mục mới
+  navKeys = ['home', 'cand', 'mon', 'data', 'sec', 's_score', 's_sbd', 's_review'];
+ }
+
+ $('#navs').innerHTML = navKeys.map(x=>`<button class="nav ${x==k?'on':''}" title="${V[x].title}" onclick="go('${x}')"><span>${ICON[x]}</span><span class="lb">${V[x].title}</span></button>`).join('');
+ $('#main').innerHTML = cur.html();
+ if(k=='data') RemoteDataService.loadLogs().then(()=>cur.res()).catch(er=>toast(er.message,'e'));
+ if(pre && pre.q && $('#q')) $('#q').value = pre.q;
+ document.body.classList.remove('open');
+ if(typeof cur.res === 'function') cur.res();
+}
 const refresh=async()=>{toast('Đang tải dữ liệu…');try{await RemoteDataService.loadCore();if(curKey=='cand'||curKey=='data')await RemoteDataService.loadCands();if(curKey=='data')await RemoteDataService.loadLogs(true);cur.res();toast('Đã làm mới dữ liệu')}catch(e){toast(e.message,'e')}};
 
 /* ===== THÍ SINH: THÊM / SỬA / XÓA / CSV ===== */
@@ -357,26 +487,386 @@ function candSave(){if(_saving)return;const c={name:v('f_name').trim(),sbd:v('f_
 function exportCSV(){const rows=[['Mã thí sinh','Họ và tên','SBD','Mã đề','Phòng thi','Hội đồng thi']].concat(CandidateService.list().map(c=>[c.cid,c.name,c.sbd,c.code,c.room,c.council]));
  const blob=new Blob(['\ufeff'+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\n')],{type:'text/csv;charset=utf-8'});
  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='thi-sinh-mau.csv';a.click();toast('Đã xuất CSV từ dữ liệu mẫu')}
-let _rvBusy=false;
-async function doReview(id,btn){
- if(_rvBusy)return;_rvBusy=true;
- const old=btn?btn.textContent:'';
- if(btn){btn.disabled=true;btn.textContent='Đang lưu…'}
- try{await SecurityService.review(id);toast('Đã lưu trạng thái xem xét vào Google Sheets')}
- catch(er){toast(er.message||'Không lưu được trạng thái xem xét. Vui lòng thử lại.','e');if(btn){btn.disabled=false;btn.textContent=old}}
- finally{_rvBusy=false;cur.res()}
+/* ===== CÁC HÀM XỬ LÝ GIAO DIỆN HỌC SINH (CHỜ KẾT NỐI APPS SCRIPT) ===== */
+function lookupExamScore(payload) {
+ // Hàm cấu trúc mẫu Frontend cho việc tra cứu điểm
+ return Promise.resolve({ success: false, message: "Chức năng tra cứu điểm đang chờ kết nối Backend Apps Script." });
 }
-function secHist(id){const ev=SecurityService.byAtt(id),a=AttemptService.get(id);openM(`<h2>Lịch sử sự kiện – ${esc(a.name)}</h2>${ev.sort((x,y)=>y.time-x.time).map(e=>`<div>• ${fmt(e.time)} – ${EVL[e.type]} – câu ${e.q} (${rvTxt(e)})</div>`).join('')}<div class="mf"><button class="btn p" onclick="closeM()">Đóng</button></div>`)}
+
+function lookupCandidateNumber(payload) {
+ // Hàm cấu trúc mẫu Frontend cho việc tra cứu SBD
+ return Promise.resolve({ success: false, message: "Chức năng tra cứu SBD đang chờ kết nối Backend Apps Script." });
+}
+
+function verifyExamForReview(payload) {
+ // Hàm cấu trúc mẫu Frontend cho việc xác thực bài thi phúc khảo
+ return Promise.resolve({ success: false, message: "Chức năng xác thực bài thi phúc khảo đang chờ kết nối Backend Apps Script." });
+}
+
+function submitReviewRequest(payload) {
+ // Hàm cấu trúc mẫu Frontend cho việc gửi yêu cầu phúc khảo
+ return Promise.resolve({ success: false, message: "Chức năng gửi yêu cầu phúc khảo sẽ được kích hoạt sau khi tích hợp Apps Script." });
+}
+
+function handleLookupScore() {
+ const code = v('lookup_code').trim();
+ const sbd = v('lookup_sbd').trim();
+ const room = v('lookup_room').trim();
+ const box = document.getElementById('score_result_container');
+ if(!code || !sbd || !room) {
+  box.innerHTML = `<div style="color:var(--r);font-weight:600;">Vui lòng điền đầy đủ Mã đề thi, Số báo danh và Phòng thi.</div>`;
+  return;
+ }
+ box.innerHTML = `<div style="color:var(--b);font-weight:600;">Đang gửi yêu cầu tra cứu...</div>`;
+ setTimeout(() => {
+  box.innerHTML = `<div style="color:var(--mu);line-height:1.6;">
+   <b>Thông báo:</b> Hệ thống chưa kết nối cơ sở dữ liệu (Apps Script).<br>
+   Không có dữ liệu điểm thi giả lập được hiển thị.<br>
+   <i>Các trường kết quả dự kiến khi kết nối thật:</i> Họ và tên, SBD, Mã đề, Phòng thi, Môn thi, Điểm thi, Trạng thái.
+  </div>`;
+ }, 400);
+}
+
+function clearLookupScore() {
+ if(document.getElementById('lookup_code')) document.getElementById('lookup_code').value = '';
+ if(document.getElementById('lookup_sbd')) document.getElementById('lookup_sbd').value = '';
+ if(document.getElementById('lookup_room')) document.getElementById('lookup_room').value = '';
+ const box = document.getElementById('score_result_container');
+ if(box) box.innerHTML = `<div style="color:var(--mu);text-align:center;">Vui lòng nhập thông tin và bấm "Tra cứu điểm" để xem kết quả.</div>`;
+}
+
+function handleLookupSBD() {
+ const name = v('sbd_name').trim();
+ const code = v('sbd_code').trim();
+ const council = v('sbd_council').trim();
+ const box = document.getElementById('sbd_result_container');
+ if(!name || !code || !council) {
+  box.innerHTML = `<div style="color:var(--r);font-weight:600;">Vui lòng nhập đầy đủ Họ và tên, Mã đề thi và Hội đồng thi.</div>`;
+  return;
+ }
+ box.innerHTML = `<div style="color:var(--b);font-weight:600;">Đang tìm kiếm thông tin...</div>`;
+ setTimeout(() => {
+  box.innerHTML = `<div style="color:var(--mu);line-height:1.6;">
+   <b>Thông báo:</b> Chức năng tra cứu số báo danh đang chờ kết nối dữ liệu thật từ Backend.<br>
+   Không sử dụng dữ liệu mẫu để giả lập kết quả.
+  </div>`;
+ }, 400);
+}
+
+function clearLookupSBD() {
+ if(document.getElementById('sbd_name')) document.getElementById('sbd_name').value = '';
+ if(document.getElementById('sbd_code')) document.getElementById('sbd_code').value = '';
+ if(document.getElementById('sbd_council')) document.getElementById('sbd_council').value = '';
+ const box = document.getElementById('sbd_result_container');
+ if(box) box.innerHTML = `<div style="color:var(--mu);text-align:center;">Vui lòng nhập thông tin và bấm "Tra cứu số báo danh".</div>`;
+}
+
+function handleVerifyReviewExam() {
+ const code = v('rev_code').trim();
+ const sbd = v('rev_sbd').trim();
+ const room = v('rev_room').trim();
+ const box = document.getElementById('review_status_container');
+ if(!code || !sbd || !room) {
+  box.innerHTML = `<div style="color:var(--r);font-weight:600;">Vui lòng nhập đầy đủ Mã đề thi, Số báo danh và Phòng thi trước khi xác minh.</div>`;
+  return;
+ }
+ box.innerHTML = `<div style="color:var(--b);font-weight:600;">Đang xác minh bài thi...</div>`;
+ setTimeout(() => {
+  box.innerHTML = `<div style="margin-bottom:12px;color:var(--t);">Bài thi chưa được xác minh qua Backend. Tuy nhiên, bạn có thể xem trước mẫu biểu yêu cầu phúc khảo:</div>
+  <button class="btn p" onclick="openReviewModal('${esc(code)}','${esc(sbd)}','${esc(room)}')">Mở hộp thoại lập đơn phúc khảo</button>`;
+ }, 400);
+}
+
+function clearReviewForm() {
+ if(document.getElementById('rev_code')) document.getElementById('rev_code').value = '';
+ if(document.getElementById('rev_sbd')) document.getElementById('rev_sbd').value = '';
+ if(document.getElementById('rev_room')) document.getElementById('rev_room').value = '';
+ const box = document.getElementById('review_status_container');
+ if(box) box.innerHTML = `<div style="color:var(--mu);text-align:center;">Chưa xác minh bài thi. Vui lòng nhập thông tin phía trên.</div>`;
+}
+
+function openReviewModal(code, sbd, room) {
+ openM(`<h2>LẬP YÊU CẦU PHÚC KHẢO BÀI THI</h2>
+ <p style="color:var(--mu);font-size:13px;margin-bottom:14px;">Vui lòng cung cấp đầy đủ thông tin chi tiết để bộ phận khảo thí tiếp nhận xử lý.</p>
+ <div class="fm review-modal-content">
+  <label>Họ và tên người đề nghị *</label><input id="m_rev_name" placeholder="Nhập họ và tên đầy đủ">
+  <label>Số điện thoại liên hệ *</label><input id="m_rev_phone" placeholder="Nhập số điện thoại">
+  <label>Email liên hệ</label><input id="m_rev_email" placeholder="Nhập email cá nhân">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+   <div><label>Mã đề thi</label><input id="m_rev_code" value="${esc(code)}" readonly style="background:#F5F7FA;"></div>
+   <div><label>Số báo danh</label><input id="m_rev_sbd" value="${esc(sbd)}" readonly style="background:#F5F7FA;"></div>
+   <div><label>Phòng thi</label><input id="m_rev_room" value="${esc(room)}" readonly style="background:#F5F7FA;"></div>
+  </div>
+  <label>Nội dung đề nghị phúc khảo *</label><textarea id="m_rev_content" placeholder="Mô tả cụ thể phần cần phúc khảo..."></textarea>
+  <label>Lý do phúc khảo *</label><textarea id="m_rev_reason" placeholder="Nêu rõ lý do đề nghị phúc khảo..."></textarea>
+  <div style="margin-top:12px;display:flex;align-items:center;gap:8px;">
+   <input type="checkbox" id="m_rev_agree" style="width:auto;min-width:0;">
+   <label for="m_rev_agree" style="display:inline;margin:0;font-weight:normal;cursor:pointer;">Cam kết thông tin cung cấp là chính xác và hoàn toàn chịu trách nhiệm.</label>
+  </div>
+ </div>
+ <div class="err" id="m_rev_err"></div>
+ <div class="mf">
+  <button class="btn" onclick="closeM()">Hủy</button>
+  <button class="btn p" onclick="submitReviewModalData()">Gửi yêu cầu phúc khảo</button>
+ </div>`);
+}
+
+function submitReviewModalData() {
+ const name = v('m_rev_name').trim();
+ const phone = v('m_rev_phone').trim();
+ const content = v('m_rev_content').trim();
+ const reason = v('m_rev_reason').trim();
+ const agree = document.getElementById('m_rev_agree') ? document.getElementById('m_rev_agree').checked : false;
+
+ if(!name || !phone || !content || !reason) {
+  $('#m_rev_err').textContent = 'Vui lòng điền đầy đủ các trường bắt buộc.';
+  return;
+ }
+ if(!agree) {
+  $('#m_rev_err').textContent = 'Bạn phải xác nhận cam kết thông tin là chính xác trước khi gửi.';
+  return;
+ }
+ $('#m_rev_err').textContent = '';
+ toast('Chức năng gửi yêu cầu phúc khảo sẽ được kích hoạt sau khi tích hợp Apps Script.', 'w');
+ closeM();
+}
+
+/* ===== CỔNG THÍ SINH: TRA CỨU ĐIỂM / SỐ BÁO DANH / PHÚC KHẢO (KẾT NỐI APPS SCRIPT) ===== */
+const _pubBusy = {};
+const pubBox = (id, html) => { const b = document.getElementById(id); if (b) b.innerHTML = html; };
+const pubState = (cls, text) => `<div class="portal-state ${cls}">${esc(text)}</div>`;
+const pubInvalid = () => Object.assign(new Error('Máy chủ trả về dữ liệu không hợp lệ.'), { kind: 'invalid' });
+const pubFail = e => {
+  const net = e && (e.kind === 'network' || e.kind === 'invalid' || e.kind === 'config');
+  return pubState('err', (e && e.message) || 'Đã xảy ra lỗi. Vui lòng thử lại.') +
+    `<div style="color:var(--mu);font-size:13px">${net ? 'Thông tin bạn đã nhập vẫn được giữ nguyên, hãy bấm nút để thử lại.' : 'Vui lòng kiểm tra lại thông tin đã nhập.'}</div>`;
+};
+
+// Chạy 1 yêu cầu: chặn bấm nhiều lần, khóa nút, hiện trạng thái đang xử lý, bắt mọi lỗi.
+async function pubRun(key, btnSel, boxId, loadingText, job) {
+  if (_pubBusy[key]) return;
+  _pubBusy[key] = true;
+  const btn = document.querySelector(btnSel);
+  const oldText = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Đang xử lý…'; }
+  pubBox(boxId, pubState('info', loadingText));
+  try { await job(); }
+  catch (e) { pubBox(boxId, pubFail(e)); }
+  finally { _pubBusy[key] = false; if (btn) { btn.disabled = false; btn.textContent = oldText; } }
+}
+
+/* ----- 1. TRA CỨU ĐIỂM ----- */
+function renderScoreResult(r) {
+  if (!r.found) return pubState('warn', r.message || 'Không tìm thấy dữ liệu phù hợp.');
+  const d = r.data;
+  if (!d || typeof d !== 'object') throw pubInvalid();
+  const info = kv({ 'Mã đề thi': d.examCode, 'Tên đề thi': d.examName || '—', 'Số báo danh': d.sbd, 'Phòng thi': d.room, 'Trạng thái bài thi': stl(d.status)[0] });
+  if (d.state === 'SCORE_AVAILABLE') {
+    return pubState('ok', r.message || 'Đã tìm thấy kết quả thi.') +
+      `<div class="portal-score"><span>Điểm thi</span><b>${esc(d.score)}</b></div>` + info;
+  }
+  if (d.state === 'NO_SCORE') return pubState('warn', r.message) + info;
+  if (d.state === 'NOT_COMPLETED' || d.state === 'NO_ATTEMPT') return pubState('info', r.message) + info;
+  throw pubInvalid();
+}
+
+function handleLookupScore() {
+  const code = v('lookup_code').trim(), sbd = v('lookup_sbd').trim(), room = v('lookup_room').trim();
+  if (!code || !sbd || !room) {
+    pubBox('score_result_container', pubState('err', 'Vui lòng điền đầy đủ Mã đề thi, Số báo danh và Phòng thi.'));
+    return;
+  }
+  pubRun('score', 'button[onclick^="handleLookupScore"]', 'score_result_container', 'Đang tra cứu…', async () => {
+    const r = await ApiService.callPublic('PUBLIC_LOOKUP_SCORE', { examCode: code, sbd: sbd, room: room });
+    pubBox('score_result_container', renderScoreResult(r));
+  });
+}
+
+function clearLookupScore() {
+  ['lookup_code', 'lookup_sbd', 'lookup_room'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  const box = document.getElementById('score_result_container');
+  if (box) box.innerHTML = `<div style="color:var(--mu);text-align:center;">Vui lòng nhập thông tin và bấm "Tra cứu điểm" để xem kết quả.</div>`;
+}
+
+/* ----- 2. TRA CỨU SỐ BÁO DANH ----- */
+function renderSbdResult(r) {
+  if (!r.found) return pubState('warn', r.message || 'Không tìm thấy dữ liệu phù hợp.');
+  const d = r.data;
+  if (!d || typeof d !== 'object' || !d.sbd) throw pubInvalid();
+  return pubState('ok', r.message || 'Đã tìm thấy số báo danh.') +
+    `<div class="portal-score"><span>Số báo danh</span><b>${esc(d.sbd)}</b></div>` +
+    kv({ 'Họ và tên': d.fullName, 'Mã đề thi': d.examCode, 'Tên đề thi': d.examName || '—', 'Phòng thi': d.room, 'Hội đồng thi': d.examCouncil });
+}
+
+function handleLookupSBD() {
+  const name = v('sbd_name').trim(), code = v('sbd_code').trim(), council = v('sbd_council').trim();
+  if (!name || !code || !council) {
+    pubBox('sbd_result_container', pubState('err', 'Vui lòng nhập đầy đủ Họ và tên, Mã đề thi và Hội đồng thi.'));
+    return;
+  }
+  pubRun('sbd', 'button[onclick^="handleLookupSBD"]', 'sbd_result_container', 'Đang tìm kiếm thông tin…', async () => {
+    const r = await ApiService.callPublic('PUBLIC_LOOKUP_CANDIDATE_NUMBER', { fullName: name, examCode: code, examCouncil: council });
+    pubBox('sbd_result_container', renderSbdResult(r));
+  });
+}
+
+function clearLookupSBD() {
+  ['sbd_name', 'sbd_code', 'sbd_council'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  const box = document.getElementById('sbd_result_container');
+  if (box) box.innerHTML = `<div style="color:var(--mu);text-align:center;">Vui lòng nhập thông tin và bấm "Tra cứu số báo danh".</div>`;
+}
+
+/* ----- 3. PHÚC KHẢO: BƯỚC 1 – XÁC MINH BÀI THI ----- */
+let _rvTarget = null; // chỉ được đặt sau khi máy chủ xác minh thành công
+let _rvSending = false;
+
+function handleVerifyReviewExam() {
+  const code = v('rev_code').trim(), sbd = v('rev_sbd').trim(), room = v('rev_room').trim();
+  _rvTarget = null;
+  if (!code || !sbd || !room) {
+    pubBox('review_status_container', pubState('err', 'Vui lòng nhập đầy đủ Mã đề thi, Số báo danh và Phòng thi trước khi xác minh.'));
+    return;
+  }
+  pubRun('rvVerify', 'button[onclick^="handleVerifyReviewExam"]', 'review_status_container', 'Đang xác minh bài thi…', async () => {
+    const r = await ApiService.callPublic('PUBLIC_VERIFY_REVIEW', { examCode: code, sbd: sbd, room: room });
+    if (!r.found) { pubBox('review_status_container', pubState('warn', r.message || 'Không tìm thấy bài thi phù hợp.')); return; }
+    const d = r.data;
+    if (!d || typeof d !== 'object') throw pubInvalid();
+    const info = kv({ 'Mã đề thi': d.examCode, 'Tên đề thi': d.examName || '—', 'Số báo danh': d.sbd, 'Phòng thi': d.room, 'Trạng thái bài thi': stl(d.status)[0] });
+    if (d.canReview !== true) { pubBox('review_status_container', pubState('warn', r.message) + info); return; }
+    _rvTarget = { code: d.examCode, sbd: d.sbd, room: d.room };
+    pubBox('review_status_container', pubState('ok', r.message || 'Đã xác minh bài thi.') + info +
+      `<div style="margin-top:12px"><button class="btn p" onclick="openReviewModal()">Lập yêu cầu phúc khảo</button></div>`);
+  });
+}
+
+function clearReviewForm() {
+  _rvTarget = null;
+  ['rev_code', 'rev_sbd', 'rev_room'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  const box = document.getElementById('review_status_container');
+  if (box) box.innerHTML = `<div style="color:var(--mu);text-align:center;">Chưa xác minh bài thi. Vui lòng nhập thông tin phía trên.</div>`;
+}
+
+/* ----- 3. PHÚC KHẢO: BƯỚC 2 – LẬP VÀ GỬI YÊU CẦU ----- */
+function openReviewModal() {
+  if (!_rvTarget) { toast('Vui lòng xác minh bài thi trước khi lập yêu cầu phúc khảo.', 'w'); return; }
+  const t = _rvTarget;
+  openM(`<h2>LẬP YÊU CẦU PHÚC KHẢO BÀI THI</h2>
+  <p style="color:var(--mu);font-size:13px;margin-bottom:14px;">Vui lòng cung cấp đầy đủ thông tin chi tiết để bộ phận khảo thí tiếp nhận xử lý.</p>
+  <div class="fm review-modal-content">
+   <label>Họ và tên người đề nghị *</label><input id="m_rev_name" maxlength="100" placeholder="Nhập họ và tên đầy đủ">
+   <label>Số điện thoại liên hệ *</label><input id="m_rev_phone" maxlength="20" placeholder="Nhập số điện thoại">
+   <label>Email liên hệ</label><input id="m_rev_email" maxlength="100" placeholder="Nhập email cá nhân">
+   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+    <div><label>Mã đề thi</label><input id="m_rev_code" value="${esc(t.code)}" readonly style="background:#F5F7FA;"></div>
+    <div><label>Số báo danh</label><input id="m_rev_sbd" value="${esc(t.sbd)}" readonly style="background:#F5F7FA;"></div>
+    <div><label>Phòng thi</label><input id="m_rev_room" value="${esc(t.room)}" readonly style="background:#F5F7FA;"></div>
+   </div>
+   <label>Nội dung đề nghị phúc khảo *</label><textarea id="m_rev_content" maxlength="1000" placeholder="Mô tả cụ thể phần cần phúc khảo..."></textarea>
+   <label>Lý do phúc khảo *</label><textarea id="m_rev_reason" maxlength="1000" placeholder="Nêu rõ lý do đề nghị phúc khảo..."></textarea>
+   <div style="margin-top:12px;display:flex;align-items:center;gap:8px;">
+    <input type="checkbox" id="m_rev_agree" style="width:auto;min-width:0;">
+    <label for="m_rev_agree" style="display:inline;margin:0;font-weight:normal;cursor:pointer;">Cam kết thông tin cung cấp là chính xác và hoàn toàn chịu trách nhiệm.</label>
+   </div>
+  </div>
+  <div class="err" id="m_rev_err"></div>
+  <div class="mf">
+   <button class="btn" onclick="closeM()">Hủy</button>
+   <button class="btn p" id="m_rev_send" onclick="submitReviewModalData()">Gửi yêu cầu phúc khảo</button>
+  </div>`);
+}
+
+async function submitReviewModalData() {
+  if (_rvSending) return;
+  const errBox = $('#m_rev_err');
+  if (!_rvTarget) { if (errBox) errBox.textContent = 'Phiên xác minh đã kết thúc. Vui lòng đóng hộp thoại và xác minh lại bài thi.'; return; }
+  const name = v('m_rev_name').trim(), phone = v('m_rev_phone').trim(), email = v('m_rev_email').trim();
+  const content = v('m_rev_content').trim(), reason = v('m_rev_reason').trim();
+  const agree = document.getElementById('m_rev_agree') ? document.getElementById('m_rev_agree').checked : false;
+  if (!name || !phone || !content || !reason) { errBox.textContent = 'Vui lòng điền đầy đủ các trường bắt buộc.'; return; }
+  if (!/^[0-9+().\s-]{8,20}$/.test(phone)) { errBox.textContent = 'Số điện thoại không hợp lệ.'; return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errBox.textContent = 'Email không hợp lệ.'; return; }
+  if (!agree) { errBox.textContent = 'Bạn phải xác nhận cam kết thông tin là chính xác trước khi gửi.'; return; }
+
+  errBox.textContent = '';
+  _rvSending = true;
+  const sendBtn = $('#m_rev_send');
+  if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Đang gửi…'; }
+  try {
+    const r = await ApiService.callPublic('PUBLIC_SUBMIT_REVIEW', {
+      examCode: _rvTarget.code, sbd: _rvTarget.sbd, room: _rvTarget.room,
+      fullName: name, phone: phone, email: email, content: content, reason: reason, agree: true
+    });
+    const d = r.data;
+    if (!r.found || !d || !d.reviewRequestId) throw Object.assign(new Error('Chưa xác nhận được việc tiếp nhận yêu cầu. Vui lòng thử lại.'), { kind: 'invalid' });
+    const done = kv({ 'Mã yêu cầu phúc khảo': d.reviewRequestId, 'Thời điểm tiếp nhận': d.createdAt || '—', 'Trạng thái': 'Đã tiếp nhận' });
+    _rvTarget = null;
+    openM(`<h2>ĐÃ TIẾP NHẬN YÊU CẦU PHÚC KHẢO</h2>${pubState('ok', r.message || 'Yêu cầu của bạn đã được ghi nhận.')}${done}
+      <p style="color:var(--mu);font-size:13px">Vui lòng lưu lại mã yêu cầu để đối chiếu khi cần.</p>
+      <div class="mf"><button class="btn p" onclick="closeM()">Đóng</button></div>`);
+    pubBox('review_status_container', pubState('ok', 'Yêu cầu phúc khảo đã được gửi. Mã yêu cầu: ' + d.reviewRequestId));
+  } catch (e) {
+    const m = $('#m_rev_err'); // giữ nguyên hộp thoại và dữ liệu đã nhập để thí sinh gửi lại
+    if (m) m.textContent = (e && e.message) || 'Gửi yêu cầu thất bại. Vui lòng thử lại.';
+    const b = $('#m_rev_send');
+    if (b) { b.disabled = false; b.textContent = 'Gửi yêu cầu phúc khảo'; }
+  } finally {
+    _rvSending = false;
+  }
+}
 
 /* ===== ĐĂNG NHẬP / ĐIỀU HƯỚNG ===== */
 function doLogin(e){e.preventDefault();const u=v('u').trim(),p=v('p');
  if(!u||!p){$('#le').textContent='Vui lòng nhập tài khoản và mật khẩu.';return false}
  $('#le').textContent='Đang đăng nhập…';
+ 
+ // Phân luồng: tài khoản khác đúng chữ "Admin" -> giao diện Học viên (chỉ phân luồng giao diện, KHÔNG phải xác thực)
+ if(u !== 'Admin'){
+   if(u.length < 2 || p.length < 2){$('#le').textContent='Tài khoản và mật khẩu cần có ít nhất 2 ký tự.';return false}
+  setTimeout(()=>{
+   $('#le').textContent='';
+   $('#login').classList.add('hide');
+   $('#app').classList.remove('hide');
+   document.body.classList.add('student-portal');
+   // Cập nhật nhãn vai trò trên thanh tiêu đề thành Học sinh
+   const userSpan = document.querySelector('#top span[title="Tài khoản đang đăng nhập"]');
+   if(userSpan) userSpan.textContent = '👤 Học viên';
+   currentUserRole = 'student';
+   try{sessionStorage.setItem('qn_user_role','student');sessionStorage.setItem('qn_student_user',u);}catch(ex){}
+   go('s_score');
+  }, 300);
+  return false;
+ }
+
  AuthService.login(u,p).then(()=>{
-  try{sessionStorage.setItem('qn_admin_cred',JSON.stringify({u,p}))}catch(ex){}
+  try{
+   sessionStorage.setItem('qn_admin_cred',JSON.stringify({u,p}));
+   sessionStorage.setItem('qn_user_role','admin');
+  }catch(ex){}
+  currentUserRole = 'admin';
+  const userSpan = document.querySelector('#top span[title="Tài khoản đang đăng nhập"]');
+  if(userSpan) userSpan.textContent = '👤 Admin';
+  document.body.classList.remove('student-portal');
   return RemoteDataService.loadAll();
  }).then(()=>{$('#le').textContent='';$('#login').classList.add('hide');$('#app').classList.remove('hide');const savedKey=sessionStorage.getItem('qn_cur_view');go((savedKey&&V[savedKey])?savedKey:'home');startAuto();startClock()}).catch(er=>{$('#le').textContent=er.message});return false}
-function doLogout(){AuthService.logout();try{sessionStorage.removeItem('qn_admin_cred');sessionStorage.removeItem('qn_cur_view')}catch(e){}stopAuto();stopClock();$('#app').classList.add('hide');$('#login').classList.remove('hide');$('#p').value='';$('#le').textContent='';closeM()}
+function doLogout(){
+ AuthService.logout();
+ currentUserRole = 'admin';
+ document.body.classList.remove('student-portal');
+ try{
+  sessionStorage.removeItem('qn_admin_cred');
+  sessionStorage.removeItem('qn_cur_view');
+  sessionStorage.removeItem('qn_user_role');
+  sessionStorage.removeItem('qn_student_user');
+ }catch(e){}
+ stopAuto(); stopClock();
+ $('#app').classList.add('hide');
+ $('#login').classList.remove('hide');
+ $('#p').value = '';
+ $('#u').value = '';
+ $('#le').textContent = '';
+ closeM();
+}
 const toggleSide=()=>innerWidth<=760?document.body.classList.toggle('open'):document.body.classList.toggle('col');
 document.addEventListener('keydown',e=>{if(e.key=='Escape')closeM()});
 
